@@ -19,8 +19,19 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
+
+    // used for Http Request
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
+    // used for JSON Response
+    compile 'com.google.code.gson:gson:2.5'
+    // used for image loading
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

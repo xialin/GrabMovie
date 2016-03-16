@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">GrabMovie</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="now_showing">Now Showing</string>
+    <string name="favourites">Favourites</string>
 </resources>

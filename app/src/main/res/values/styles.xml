@@ -1,8 +1,33 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+    </style>
+
+    <!-- view pager -->
+    <style name="TabDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">19dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:background">@color/green</item>
+    </style>
+
+    <style name="TabText">
+        <item name="android:layout_width">97dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="TabNavIndicator">
+        <item name="android:layout_width">102dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:background">@color/green</item>
     </style>
 
 </resources>
