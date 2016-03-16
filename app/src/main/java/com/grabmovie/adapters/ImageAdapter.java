@@ -85,6 +85,11 @@ public class ImageAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void resetData(ArrayList<MovieSummary> movies) {
+        mData = movies;
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder {
         ImageView imageView;
     }

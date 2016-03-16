@@ -2,6 +2,9 @@ package com.grabmovie.apis;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+
+import com.grabmovie.models.FavouriteMovie;
 
 /**
  * Created by xialin on 15/3/16.
@@ -22,12 +25,18 @@ import android.os.Parcelable;
 public class MovieSummary implements Parcelable {
     int id;
     String poster_path;
-    String title;
-    float vote_average;
-    int vote_count;
 
     private MovieSummary(Parcel in) {
         readFromParcel(in);
+    }
+
+    /**
+     * For converting from local FavouriteMovie object
+     * @param movie FavouriteMovie object saved locally
+     */
+    public MovieSummary(@NonNull FavouriteMovie movie) {
+        this.id = movie.getMovieId();
+        this.poster_path = movie.getPosterPath();
     }
 
     @Override
@@ -46,7 +55,9 @@ public class MovieSummary implements Parcelable {
         poster_path = in.readString();
     }
 
-    public static final Parcelable.Creator<MovieSummary> CREATOR = new Parcelable.Creator<MovieSummary>() {
+    public static final Parcelable.Creator<MovieSummary> CREATOR
+            = new Parcelable.Creator<MovieSummary>() {
+
         public MovieSummary createFromParcel(Parcel in) {
             return new MovieSummary(in);
         }

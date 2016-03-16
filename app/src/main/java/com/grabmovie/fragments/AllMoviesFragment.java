@@ -28,11 +28,11 @@ public class AllMoviesFragment extends Fragment {
 
     private static final String TAG = "AllMoviesFragment";
 
+    private int mTotalPages;
+
     private GridView mGridView;
 
-    private ImageAdapter mGridAdapter;
-
-    protected int mTotalPages;
+    protected ImageAdapter mGridAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,14 +41,6 @@ public class AllMoviesFragment extends Fragment {
         mGridView = (GridView) rootView.findViewById(R.id.movie_grid);
         mGridAdapter = new ImageAdapter(getActivity());
         mGridView.setAdapter(mGridAdapter);
-        mGridView.setOnScrollListener(new EndlessScrollListener() {
-            @Override
-            public boolean onLoadMore(int page, int totalItemsCount) {
-                GmLogger.d(TAG, "onLoadMore next page: %d/%d", page, mTotalPages);
-                loadMovies(page);
-                return page <= mTotalPages;
-            }
-        });
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 MovieSummary movie = (MovieSummary) parent.getItemAtPosition(position);
@@ -58,6 +50,7 @@ public class AllMoviesFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        enableEndlessScroll();
 
         loadMovies(1);
 
@@ -70,7 +63,8 @@ public class AllMoviesFragment extends Fragment {
             @Override
             public void onSuccess(GetMoviesResponse movies) {
                 GmLogger.d(TAG, "loadMovies.onSuccess");
-                updateGridView(movies);
+                mGridAdapter.pushData(movies.getMovies());
+                mTotalPages = movies.getTotalPages();
             }
 
             @Override
@@ -81,9 +75,15 @@ public class AllMoviesFragment extends Fragment {
         }).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, page);
     }
 
-    protected void updateGridView(GetMoviesResponse movies) {
-        mGridAdapter.pushData(movies.getMovies());
-        mTotalPages = movies.getTotalPages();
+    protected void enableEndlessScroll() {
+        mGridView.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+                GmLogger.d(TAG, "onLoadMore next page: %d/%d", page, mTotalPages);
+                loadMovies(page);
+                return page <= mTotalPages;
+            }
+        });
     }
 
     /**

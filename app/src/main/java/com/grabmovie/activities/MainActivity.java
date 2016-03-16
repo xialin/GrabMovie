@@ -41,7 +41,19 @@ public class MainActivity extends FragmentActivity {
         // navigation tab
         mNavigationIndicator = findViewById(R.id.navigation_indicator);
         mTabAll = findViewById(R.id.tab_all);
+        mTabAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.setCurrentItem(0, true);
+            }
+        });
         mTabFav = findViewById(R.id.tab_favourite);
+        mTabFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.setCurrentItem(1, true);
+            }
+        });
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPagerAdapter = new SlidePagerAdapter(getSupportFragmentManager());

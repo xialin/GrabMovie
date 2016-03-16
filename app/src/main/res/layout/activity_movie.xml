@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"/>
-            <!-- Poster and Title (Year) TODO: use palette color -->
+            <!-- Poster / Title / Rating TODO: use palette color -->
             <RelativeLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/section_margin_top"
                     android:layout_toEndOf="@id/poster_img"
                     android:layout_toRightOf="@id/poster_img"
                     android:textColor="@color/transparent_white_50"
@@ -61,6 +61,19 @@
                     android:layout_toRightOf="@id/poster_img"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tagline"
+                    android:layout_marginTop="@dimen/section_margin_top"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/poster_img"
+                    android:layout_toRightOf="@id/poster_img"
+                    android:textColor="@color/transparent_white_50"
+                    android:textSize="12sp"/>
             </RelativeLayout>
 
             <!-- Info | Similar | Favor -->
@@ -108,17 +121,19 @@
                 android:id="@+id/overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/section_margin_top"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:textSize="15sp"/>
+                android:textSize="16sp"/>
 
             <!-- TODO: Released, Runtime, Genres, Budget, Revenue, Language -->
-            <!-- TODO: ViewStub Trailers -->
+            <!-- TODO: Trailers -->
 
             <!-- Related Movies -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/section_margin_top"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="@string/related_movies"

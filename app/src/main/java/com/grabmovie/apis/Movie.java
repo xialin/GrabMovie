@@ -29,6 +29,10 @@ public class Movie {
     float vote_average;
     int vote_count;
 
+    public int getId() {
+        return id;
+    }
+
     public String getBackdropPath() {
         return backdrop_path;
     }
@@ -47,6 +51,14 @@ public class Movie {
 
     public String getOverview() {
         return overview;
+    }
+
+    public float getVoteAverage() {
+        return vote_average;
+    }
+
+    public int getVoteCount() {
+        return vote_count;
     }
 
     private class Genre {
