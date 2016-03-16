@@ -4,4 +4,9 @@
     
     <string name="now_showing">Now Showing</string>
     <string name="favourites">Favourites</string>
+
+    <string name="movie_not_found">Movie not found.</string>
+    <string name="no_related_movie">No related movie.</string>
+    <string name="related_movies">Related Movies</string>
+    <string name="trailers">Trailers</string>
 </resources>

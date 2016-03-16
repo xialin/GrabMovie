@@ -14,18 +14,18 @@ import java.net.HttpURLConnection;
  * Created by xialin on 15/3/16.
  *
  */
-public class GetMoviesHttpRequest extends AsyncTask<Integer, Void, Movies> {
+public class GetMoviesRequest extends AsyncTask<Integer, Void, GetMoviesResponse> {
 
     private static final String TAG = "GetMoviesHttpRequest";
 
     private GetMoviesHttpRequestListener mListener;
 
     public interface GetMoviesHttpRequestListener {
-        void onSuccess(Movies movies);
+        void onSuccess(GetMoviesResponse movies);
         void onFailure(int err);
     }
 
-    public GetMoviesHttpRequest(GetMoviesHttpRequestListener listener) {
+    public GetMoviesRequest(GetMoviesHttpRequestListener listener) {
         mListener = listener;
     }
 
@@ -36,13 +36,13 @@ public class GetMoviesHttpRequest extends AsyncTask<Integer, Void, Movies> {
     }
 
     @Override
-    protected Movies doInBackground(Integer... params) {
+    protected GetMoviesResponse doInBackground(Integer... params) {
         try {
             Integer page = params[0];
             Response response = GmAPIs.getMovies(page);
             String responseStr = response.body().string();
             Gson gson = new GsonBuilder().create();
-            return gson.fromJson(responseStr, Movies.class);
+            return gson.fromJson(responseStr, GetMoviesResponse.class);
 
         } catch (IOException e) {
             GmLogger.e(TAG, e, "Failed to parse response.");
@@ -51,7 +51,7 @@ public class GetMoviesHttpRequest extends AsyncTask<Integer, Void, Movies> {
     }
 
     @Override
-    protected void onPostExecute(Movies movies) {
+    protected void onPostExecute(GetMoviesResponse movies) {
         super.onPostExecute(movies);
         if (mListener == null) return;
 

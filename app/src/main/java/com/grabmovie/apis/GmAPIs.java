@@ -110,6 +110,26 @@ public class GmAPIs {
     }
 
     /**
+     * [GET] movie details
+     *
+     * @param movieId movie ID
+     * @return movie details
+     * @throws IOException
+     */
+    public static Response getMovie(int movieId) throws IOException {
+        HttpUrl url = HttpUrl.parse(BASE_URL + movieId)
+                .newBuilder().addQueryParameter(PARAM_API_KEY, API_KEY)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .build();
+
+        return GmAPIs.getClient().newCall(request).execute();
+    }
+
+    /**
      * [GET] videos of selected movie
      * @param movieId movie ID
      * @return a list of trailers

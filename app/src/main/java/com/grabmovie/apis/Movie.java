@@ -1,41 +1,66 @@
 package com.grabmovie.apis;
 
 /**
- * Created by xialin on 15/3/16.
+ * Created by xialin on 16/3/16.
  *
- * {
- *    "adult": false,
- *    "backdrop_path": "/99qMHgawGX9QWx6zllecsMbbLkj.jpg",
- *    "id": 17169,
- *    "original_title": "Any Which Way You Can",
- *    "release_date": "1980-12-17",
- *    "poster_path": "/fcwYEVdBa251yqeuTfFQXHlMrHt.jpg",
- *    "popularity": 0.612450827242979,
- *    "title": "Any Which Way You Can",
- *    "vote_average": 6.6,
- *    "vote_count": 9
- * }
  */
 public class Movie {
     int id;
+    String imdb_id;
+    boolean adult;
+    String backdrop_path;
+    int budget;
+    Genre[] genres;
+    String homepage;
+    String original_language;
+    String original_title;
+    String overview;
+    float popularity;
     String poster_path;
+    Company[] production_companies;
+    String release_date;
+    int revenue;
+    int runtime;
+    Language[] spoken_languages;
+    String status;
+    String tagline;
     String title;
+    boolean video;
     float vote_average;
     int vote_count;
 
-    boolean adult;
-    float popularity;
-    String backdrop_path;
-    String original_title;
-    String release_date;
-
-    // additional fields in full details
-    int[] genre_ids;
-    String original_language;
-    String overview;
-    boolean video;
+    public String getBackdropPath() {
+        return backdrop_path;
+    }
 
     public String getPosterPath() {
         return poster_path;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    private class Genre {
+        int id;
+        String name;
+    }
+
+    private class Company {
+        int id;
+        String name;
+    }
+
+    private class Language {
+        String iso_639_1;
+        String name;
     }
 }

@@ -1,5 +1,6 @@
 package com.grabmovie.fragments;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
+import com.grabmovie.Constants;
 import com.grabmovie.R;
+import com.grabmovie.activities.MovieActivity;
 import com.grabmovie.adapters.ImageAdapter;
-import com.grabmovie.apis.GetMoviesHttpRequest;
-import com.grabmovie.apis.Movies;
+import com.grabmovie.apis.GetMoviesRequest;
+import com.grabmovie.apis.GetMoviesResponse;
+import com.grabmovie.apis.MovieSummary;
 import com.grabmovie.utils.GmLogger;
 
 /**
@@ -48,7 +51,11 @@ public class AllMoviesFragment extends Fragment {
         });
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                MovieSummary movie = (MovieSummary) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(AllMoviesFragment.this.getActivity(), MovieActivity.class);
+                intent.putExtra(Constants.INTENT_KEY_MOVIE_ID, movie.getId());
+                startActivity(intent);
             }
         });
 
@@ -59,9 +66,9 @@ public class AllMoviesFragment extends Fragment {
 
     protected void loadMovies(int page) {
         GmLogger.d(TAG, "loadMovies at page: %d", page);
-        new GetMoviesHttpRequest(new GetMoviesHttpRequest.GetMoviesHttpRequestListener() {
+        new GetMoviesRequest(new GetMoviesRequest.GetMoviesHttpRequestListener() {
             @Override
-            public void onSuccess(Movies movies) {
+            public void onSuccess(GetMoviesResponse movies) {
                 GmLogger.d(TAG, "loadMovies.onSuccess");
                 updateGridView(movies);
             }
@@ -74,7 +81,7 @@ public class AllMoviesFragment extends Fragment {
         }).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, page);
     }
 
-    protected void updateGridView(Movies movies) {
+    protected void updateGridView(GetMoviesResponse movies) {
         mGridAdapter.pushData(movies.getMovies());
         mTotalPages = movies.getTotalPages();
     }

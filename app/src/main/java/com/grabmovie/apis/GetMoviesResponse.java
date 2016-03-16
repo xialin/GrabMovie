@@ -7,13 +7,13 @@ import java.util.Arrays;
  * Created by xialin on 15/3/16.
  *
  */
-public class Movies {
+public class GetMoviesResponse {
     int page;
     int total_pages;
     int total_results;
-    Movie[] results;
+    MovieSummary[] results;
 
-    public ArrayList<Movie> getMovies() {
+    public ArrayList<MovieSummary> getMovies() {
         return new ArrayList<>(Arrays.asList(results));
     }
 

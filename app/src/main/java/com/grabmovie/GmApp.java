@@ -32,7 +32,7 @@ public class GmApp extends Application {
         config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
         if (BuildConfig.DEBUG) {
-            config.writeDebugLogs(); // Remove for release app
+//            config.writeDebugLogs(); // Remove for release app
         }
 
         // Initialize ImageLoader with configuration.

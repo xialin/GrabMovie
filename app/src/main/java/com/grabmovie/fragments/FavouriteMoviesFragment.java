@@ -2,8 +2,8 @@ package com.grabmovie.fragments;
 
 import android.os.AsyncTask;
 
-import com.grabmovie.apis.GetMoviesHttpRequest;
-import com.grabmovie.apis.Movies;
+import com.grabmovie.apis.GetMoviesRequest;
+import com.grabmovie.apis.GetMoviesResponse;
 import com.grabmovie.utils.GmLogger;
 
 /**
@@ -17,9 +17,9 @@ public class FavouriteMoviesFragment extends AllMoviesFragment {
     @Override
     public void loadMovies(int page) {
         GmLogger.d(TAG, "load favourite movies at page: %d", page);
-        new GetMoviesHttpRequest(new GetMoviesHttpRequest.GetMoviesHttpRequestListener() {
+        new GetMoviesRequest(new GetMoviesRequest.GetMoviesHttpRequestListener() {
             @Override
-            public void onSuccess(Movies movies) {
+            public void onSuccess(GetMoviesResponse movies) {
                 GmLogger.d(TAG, "loadMovies.onSuccess");
                 updateGridView(movies);
                 mTotalPages = 1;

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.grabmovie.R;
 import com.grabmovie.apis.GmAPIs;
-import com.grabmovie.apis.Movie;
+import com.grabmovie.apis.MovieSummary;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -23,16 +23,16 @@ import java.util.ArrayList;
  */
 public class ImageAdapter extends BaseAdapter {
 
-    private ArrayList<Movie> data = new ArrayList<>();
+    private ArrayList<MovieSummary> mData = new ArrayList<>();
 
-    private LayoutInflater inflater;
+    private LayoutInflater mInflater;
 
-    private DisplayImageOptions options;
+    private DisplayImageOptions mOptions;
 
     public ImageAdapter(Context context) {
-        inflater = LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(context);
 
-        options = new DisplayImageOptions.Builder()
+        mOptions = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.item_empty)
                 .showImageForEmptyUri(R.drawable.item_empty)
                 .showImageOnFail(R.drawable.error)
@@ -45,12 +45,12 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return data.size();
+        return mData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return data.get(position);
+        return mData.get(position);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ImageAdapter extends BaseAdapter {
         final ViewHolder holder;
         View view = convertView;
         if (view == null) {
-            view = inflater.inflate(R.layout.item_grid_image, parent, false);
+            view = mInflater.inflate(R.layout.item_grid_image, parent, false);
             assert view != null;
             holder = new ViewHolder();
             holder.imageView = (ImageView) view.findViewById(R.id.image);
@@ -73,15 +73,15 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         // TODO:
-        Movie movie = (Movie)getItem(position);
+        MovieSummary movie = (MovieSummary)getItem(position);
         String url = GmAPIs.getPosterUrl(movie.getPosterPath());
-        ImageLoader.getInstance().displayImage(url, holder.imageView, options);
+        ImageLoader.getInstance().displayImage(url, holder.imageView, mOptions);
 
         return view;
     }
 
-    public void pushData(ArrayList<Movie> movies){
-        data.addAll(movies);
+    public void pushData(ArrayList<MovieSummary> movies){
+        mData.addAll(movies);
         notifyDataSetChanged();
     }
 

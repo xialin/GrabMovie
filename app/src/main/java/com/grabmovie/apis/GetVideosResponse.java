@@ -4,7 +4,7 @@ package com.grabmovie.apis;
  * Created by xialin on 15/3/16.
  *
  */
-public class Videos {
+public class GetVideosResponse {
     int id;
     Video[] results;
 
