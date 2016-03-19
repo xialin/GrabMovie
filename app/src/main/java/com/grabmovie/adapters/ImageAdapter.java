@@ -72,7 +72,6 @@ public class ImageAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        // TODO:
         MovieSummary movie = (MovieSummary)getItem(position);
         String url = GmAPIs.getPosterUrl(movie.getPosterPath());
         ImageLoader.getInstance().displayImage(url, holder.imageView, mOptions);

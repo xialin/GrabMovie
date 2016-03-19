@@ -12,9 +12,18 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file('../release-key.jks')
+            storePassword KEYSTORE_PASSWORD
+            keyAlias "grabmovie"
+            keyPassword KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false // TODO: enable proguard
+            signingConfig signingConfigs.release
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,7 +37,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-
     // used for Http Request
     compile 'com.squareup.okhttp:okhttp:2.6.0'
     // used for JSON Response
